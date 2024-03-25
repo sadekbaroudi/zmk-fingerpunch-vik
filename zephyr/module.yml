@@ -1,3 +1,4 @@
+# name: vik-core
 build:
   settings:
-    board_root: .
+    dts_root: .
