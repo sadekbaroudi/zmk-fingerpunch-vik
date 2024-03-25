@@ -1,0 +1,42 @@
+# Copyright (c) 2023 Pete Johanson
+# SPDX-License-Identifier: MIT
+
+description: |
+    GPIO pins exposed on VIK connectors.
+
+    The VIK interface offers 9 GPIO pins, with all but two also specified
+    for alternate functions, such as SPI, I2C, etc.
+
+    Proceeding from pin 1 on a VIK controller:
+    * 3.3v
+    * GND
+    * SDA
+    * SCL
+    * RGB Data Out 
+    * 5V
+    * Digital/Analog GPIO 1
+    * COPI
+    * Digital/Analog GPIO 2
+    * CS
+    * CIPO
+    * SCLK
+
+    This binding provides a nexus mapping for 9 pins, as depicted below:
+
+        - 3V3
+        - GND
+        0 SDA
+        1 SCL
+        2 RGB Data Out
+        - 5V
+        3 Digital/Analog GPIO 1
+        4 COPI
+        5 Digital/Analog GPIO 2
+        6 CS
+        7 CIPO
+        8 SCLK
+
+
+compatible: "sadekbaroudi,vik-connector"
+
+include: [gpio-nexus.yaml, base.yaml]
