@@ -1,0 +1,37 @@
+/*
+ * Copyright (c) 2022 The ZMK Contributors
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+// i2c cirque config for vikoto
+// note that if you are using I2C with vikoto, you need to use the intenal pull up resistors...
+// look in boards/arm/vikoto/vikoto-pinctrl.dtsi
+// look for "bias-pull-up;"
+// generally recommend spi, as it doesn't require any custom configuration
+vik_cirque_i2c: &vik_i2c {
+    status = "okay";
+    
+    glidepoint: glidepoint@2a {
+        compatible = "cirque,pinnacle";
+        reg = <0x2a>;
+        status = "okay";
+        dr-gpios = <&vik_conn 5 (GPIO_ACTIVE_HIGH)>; // DR pin on cirque is always &vik_conn 5
+
+        sensitivity = "4x";
+        sleep;
+        no-taps;
+    };
+};
+
+// after switching to latest version of pete's pointing code, remove input_config in the two spots above and add this
+/ {
+    glidepoint_input {
+        compatible = "zmk,input-listener";
+        device = <&glidepoint>;
+
+        xy-swap;
+        y-invert;
+        x-invert;
+    };
+};

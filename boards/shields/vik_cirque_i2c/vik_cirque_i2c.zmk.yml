@@ -1,0 +1,7 @@
+file_format: "1"
+id: vik_cirque_i2c
+name: vik_cirque_i2c
+type: shield
+url: https://github.com/sadekbaroudi/vik/
+exposes:
+  - i2c_glidepoint
