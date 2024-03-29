@@ -5,11 +5,12 @@
  */
 
 // i2c cirque config for vikoto
-// note that if you are using I2C with vikoto, you need to use the intenal pull up resistors...
-// look in boards/arm/vikoto/vikoto-pinctrl.dtsi
+// note that if you are using I2C with a controller with a vik connector directly on it (e.g. vikoto)
+// you need to use the intenal pull up resistors on the board
+// look in boards/arm/vikoto/vikoto-pinctrl.dtsi as an example
 // look for "bias-pull-up;"
 // generally recommend spi, as it doesn't require any custom configuration
-vik_cirque_i2c: &vik_i2c {
+&vik_i2c {
     status = "okay";
     
     glidepoint: glidepoint@2a {

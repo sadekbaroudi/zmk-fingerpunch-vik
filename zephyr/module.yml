@@ -1,4 +1,7 @@
-# name: vik-core
+name: vik-core
 build:
+#   depends:
+#     - cirque-input-module
   settings:
     dts_root: .
+    board_root: .
