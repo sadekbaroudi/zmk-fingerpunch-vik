@@ -1,0 +1,7 @@
+file_format: "1"
+id: vik_cirque_spi
+name: vik_cirque_spi
+type: shield
+url: https://github.com/sadekbaroudi/vik/
+exposes:
+  - spi_glidepoint
