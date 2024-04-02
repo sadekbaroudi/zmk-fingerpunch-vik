@@ -1,0 +1,9 @@
+// if this is ever updated in the xivik vik_connector.dtsi, this needs to be updated as well
+&i2c0_default {
+    group1 {
+        bias-pull-up;
+    };
+    group2 {
+        bias-pull-up;
+    };
+};

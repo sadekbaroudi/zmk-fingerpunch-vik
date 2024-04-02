@@ -1,0 +1,9 @@
+// if this is ever updated in the svlinky vik_connector.dtsi, this needs to be updated as well
+&i2c1_vik {
+    group1 {
+        bias-pull-up;
+    };
+    group2 {
+        bias-pull-up;
+    };
+};
