@@ -1,0 +1,84 @@
+/*
+ * Copyright (c) 2021 The ZMK Contributors
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+#include <dt-bindings/zmk/matrix_transform.h>
+
+&vik_spi {
+    status = "okay";
+    cs-gpios = <&vik_conn 6 GPIO_ACTIVE_LOW>;
+
+    shift_reg: 595@0 {
+        compatible = "zmk,gpio-595";
+        status = "okay";
+        gpio-controller;
+        spi-max-frequency = <200000>;
+        reg = <0>;
+        #gpio-cells = <2>;
+        ngpios = <16>;
+    };
+};
+
+/ {
+    chosen {
+        zmk,kscan = &kscan0;
+        zmk,matrix_transform = &default_transform;
+        // for logging, remove later
+        zephyr,console = &cdc_acm_uart;
+    };
+
+    kscan0: kscan_0 {
+        compatible = "zmk,kscan-gpio-matrix";
+        diode-direction = "col2row";
+
+        col-gpios
+            = <&shift_reg 0 (GPIO_ACTIVE_HIGH)>
+            , <&shift_reg 1 (GPIO_ACTIVE_HIGH)>
+            , <&shift_reg 2 (GPIO_ACTIVE_HIGH)>
+            , <&shift_reg 3 (GPIO_ACTIVE_HIGH)>
+            , <&shift_reg 4 (GPIO_ACTIVE_HIGH)>
+            , <&shift_reg 5 (GPIO_ACTIVE_HIGH)>
+            , <&shift_reg 6 (GPIO_ACTIVE_HIGH)>
+            , <&shift_reg 7 (GPIO_ACTIVE_HIGH)>
+            , <&shift_reg 8 (GPIO_ACTIVE_HIGH)>
+            , <&shift_reg 9 (GPIO_ACTIVE_HIGH)>
+            , <&shift_reg 10 (GPIO_ACTIVE_HIGH)>
+            , <&shift_reg 11 (GPIO_ACTIVE_HIGH)>
+            , <&shift_reg 12 (GPIO_ACTIVE_HIGH)>
+            , <&shift_reg 13 (GPIO_ACTIVE_HIGH)>
+            , <&shift_reg 14 (GPIO_ACTIVE_HIGH)>
+            , <&shift_reg 15 (GPIO_ACTIVE_HIGH)>
+            ;
+
+        row-gpios
+            = <&vik_conn 3 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> // row 0
+            , <&vik_conn 5 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> // row 1
+            ;
+    };
+
+    default_transform: keymap_transform_0 {
+        compatible = "zmk,matrix-transform";
+        columns = <16>;
+        rows = <2>;
+
+        map = <
+                      RC(0,11)
+            RC(0,12)  RC(0,15)  RC(0,14)        RC(0,0) RC(0,1) RC(0,2) RC(0,3)
+                      RC(0,13)                  RC(1,0) RC(1,1) RC(1,2) RC(1,3)
+                                                RC(0,4) RC(0,5) RC(0,6) RC(0,7)
+                      RC(0,11)                  RC(1,4) RC(1,5) RC(1,6) RC(1,7)
+            RC(0,12)  RC(0,15)  RC(0,14)            RC(0,8)        RC(0,9)
+                      RC(0,13)
+        >;
+    };
+};
+
+// for logging, remove later
+&usbd {
+    status = "okay";
+    cdc_acm_uart: cdc_acm_uart {
+        compatible = "zephyr,cdc-acm-uart";
+    };
+};

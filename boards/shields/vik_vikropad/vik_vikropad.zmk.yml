@@ -1,0 +1,7 @@
+file_format: "1"
+id: vik_vikropad
+name: vik_vikropad
+type: shield
+url: https://github.com/sadekbaroudi/vik/tree/master/pcb/vikropad/
+features:
+  - keys
