@@ -1,0 +1,76 @@
+/*
+ * Copyright (c) 2024 Sadek Baroudi
+ * SPDX-License-Identifier: MIT
+ */
+
+/ {
+    sensors {
+        compatible = "zmk,keymap-sensors";
+        sensors = <&encoder_1>;
+        triggers-per-rotation = <20>;
+    };
+
+    // PER56 encoder
+    encoder_1: encoder_1 {
+        compatible = "alps,ec11";
+        a-gpios = <&vik_conn 3 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+        b-gpios = <&vik_conn 5 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+        steps = <80>;
+        status = "okay";
+    };
+
+    /*
+    // End users need to define their PER56 behavior in their keymap
+    keymap {
+        default_layer {
+            sensor-bindings = <&inc_dec_kp C_VOLUME_UP C_VOLUME_DOWN>;
+        };
+        nav_layer {
+            sensor-bindings = <&inc_dec_kp C_VOLUME_UP C_VOLUME_DOWN>;
+        };
+        sym_layer {
+            sensor-bindings = <&inc_dec_kp C_VOLUME_UP C_VOLUME_DOWN>;
+        };
+        func_layer {
+            sensor-bindings = <&inc_dec_kp C_VOLUME_UP C_VOLUME_DOWN>;
+        };
+        media_layer {
+            sensor-bindings = <&inc_dec_kp C_VOLUME_UP C_VOLUME_DOWN>;
+        };
+        winnav_layer {
+            sensor-bindings = <&inc_dec_kp C_VOLUME_UP C_VOLUME_DOWN>;
+        };
+    };
+    */
+};
+
+/**
+ * See the readme of the https://github.com/sadekbaroudi/zmk-XXXXXXX driver (to be filled out once available)
+ */
+/*
+&vik_spi {
+    status = "okay";
+    cs-gpios = <&vik_conn 6 GPIO_ACTIVE_LOW>;
+
+    // update all of this once 3360 driver exists
+    trackball: trackball@0 {
+        status = "okay";
+        compatible = "pixart,pmw3610";
+        reg = <0>;
+        spi-max-frequency = <2000000>;
+        irq-gpios = <&vik_conn 4 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+
+        //   optional features
+        // snipe-layers = <1>;
+        // scroll-layers = <2 3>;
+        // automouse-layer = <4>;
+    };
+};
+
+/ {
+    trackball_listener {
+      compatible = "zmk,input-listener";
+      device = <&trackball>;
+  };
+};
+*/
