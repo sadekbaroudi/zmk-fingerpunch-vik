@@ -3,6 +3,8 @@
  * SPDX-License-Identifier: MIT
  */
 
+#include "../vik_shield_dts_preprocess.h"
+
 / {
     sensors {
         compatible = "zmk,keymap-sensors";

@@ -4,6 +4,8 @@
  * SPDX-License-Identifier: MIT
  */
 
+#include "../vik_shield_dts_preprocess.h"
+
 // i2c cirque config for vikoto
 // note that if you are using I2C with a controller with a vik connector directly on it (e.g. vikoto)
 // you need to use the intenal pull up resistors on the board

@@ -4,6 +4,8 @@
  * SPDX-License-Identifier: MIT
  */
 
+#include "../vik_shield_dts_preprocess.h"
+
 &vik_spi {
     status = "okay";
     cs-gpios = VIK_SPI_CS_PREFIX_PROCESSED <&vik_conn 6 GPIO_ACTIVE_LOW>;

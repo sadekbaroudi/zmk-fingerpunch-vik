@@ -39,21 +39,6 @@ include:
 
 The above contents will build your keyboard with an attached cirque trackpad.
 
-### VIK SPI module usage
-
-If you are using any shield that uses SPI, you will need to also use the `vik_spi_adapter` shield in front of the VIK module shield
-
-For local builds, example below. Notice the `vik_spi_adapter` that comes before the `vik_cirque_spi`:  
-`west build --pristine -b "pinkies_out_v3@3.0.0" -- -DSHIELD="vik_spi_adapter vik_cirque_spi" -DZMK_EXTRA_MODULES='/home/sadek/zmk-fingerpunch-keyboards;/home/sadek/zmk-fingerpunch-controllers;/home/sadek/zmk-fingerpunch-vik;/home/sadek/cirque-input-module'`
-
-For github actions builds, examples below:
-```
-  - board: xivik@0.1.0
-    shield: arachnophobe vik_spi_adapter vik_cirque_spi
-  - board: vulpes_majora_v1
-    shield: vik_spi_adapter vik_pmw3360_per56
-```
-
 ## Examples
 
 For a whole list of examples of this, please see the [zmk-fingerpunch-keyboards](https://github.com/sadekbaroudi/zmk-fingerpunch-keyboards) repository.
@@ -103,6 +88,12 @@ For the spi bus that is being used by VIK, you can do it as follows:
 ```
 #define VIK_SPI_REG_START 1
 #define VIK_SPI_CS_PREFIX <&gpio0 21 GPIO_ACTIVE_LOW>
+```
+
+Please note that if you have multiple `cs-gpios`, you should include all of them, comma separated (exactly as you'd enter them into the devicetree). Example:
+```
+#define VIK_SPI_REG_START 1
+#define VIK_SPI_CS_PREFIX <&gpio0 21 GPIO_ACTIVE_LOW>, <&gpio0 14 GPIO_ACTIVE_LOW>
 ```
 
 For a full example, see the `pinkies_out_v3` board [here](https://github.com/sadekbaroudi/zmk-fingerpunch-keyboards/blob/main/boards/arm/pinkies_out_v3/pinkies_out_v3.dts), also pasted below.
