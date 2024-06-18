@@ -1,0 +1,9 @@
+#ifndef VIK_SPI_REG_START
+#define VIK_SPI_REG_START 0
+#endif
+
+#ifdef VIK_SPI_CS_PREFIX
+#define VIK_SPI_CS_PREFIX_PROCESSED VIK_SPI_CS_PREFIX,
+#else
+#define VIK_SPI_CS_PREFIX_PROCESSED
+#endif

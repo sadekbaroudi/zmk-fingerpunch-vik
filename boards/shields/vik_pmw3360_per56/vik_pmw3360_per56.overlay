@@ -50,13 +50,13 @@
 /*
 &vik_spi {
     status = "okay";
-    cs-gpios = <&vik_conn 6 GPIO_ACTIVE_LOW>;
+    cs-gpios = VIK_SPI_CS_PREFIX_PROCESSED <&vik_conn 6 GPIO_ACTIVE_LOW>;
 
     // update all of this once 3360 driver exists
-    trackball: trackball@0 {
+    trackball: trackball@VIK_SPI_REG_START {
         status = "okay";
         compatible = "pixart,pmw3610";
-        reg = <0>;
+        reg = <VIK_SPI_REG_START>;
         spi-max-frequency = <2000000>;
         irq-gpios = <&vik_conn 4 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
 

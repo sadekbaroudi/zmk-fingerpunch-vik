@@ -39,6 +39,21 @@ include:
 
 The above contents will build your keyboard with an attached cirque trackpad.
 
+### VIK SPI module usage
+
+If you are using any shield that uses SPI, you will need to also use the `vik_spi_adapter` shield in front of the VIK module shield
+
+For local builds, example below. Notice the `vik_spi_adapter` that comes before the `vik_cirque_spi`:  
+`west build --pristine -b "pinkies_out_v3@3.0.0" -- -DSHIELD="vik_spi_adapter vik_cirque_spi" -DZMK_EXTRA_MODULES='/home/sadek/zmk-fingerpunch-keyboards;/home/sadek/zmk-fingerpunch-controllers;/home/sadek/zmk-fingerpunch-vik;/home/sadek/cirque-input-module'`
+
+For github actions builds, examples below:
+```
+  - board: xivik@0.1.0
+    shield: arachnophobe vik_spi_adapter vik_cirque_spi
+  - board: vulpes_majora_v1
+    shield: vik_spi_adapter vik_pmw3360_per56
+```
+
 ## Examples
 
 For a whole list of examples of this, please see the [zmk-fingerpunch-keyboards](https://github.com/sadekbaroudi/zmk-fingerpunch-keyboards) repository.
@@ -78,3 +93,46 @@ vik_spi_pmw3610: &spi1 {};
 In the example above, it's based on a controller that has an integrated VIK connector. However, you can also add VIK support to a keyboard like [vulpes minora](https://github.com/sadekbaroudi/vulpes-minora). In this case, the keyboard is wired to work directly from a nice!nano pinout, to a VIK connector on the PCB.
 
 There is also an example of the VIK connector definition, as shown in the [nice_nano_v2.overlay](https://github.com/sadekbaroudi/zmk-fingerpunch-keyboards/blob/main/boards/shields/vulpes_minora/boards/nice_nano_v2.overlay) for that board.
+
+### VIK SPI support
+
+**IMPORTANT NOTE:**  
+When adding SPI support, if you have an existing SPI device on your keyboard, you need to let the VIK module know where to start the register (`reg` value), and you need to give it the existing `cs-gpios`.
+
+For the spi bus that is being used by VIK, you can do it as follows:
+```
+#define VIK_SPI_REG_START 1
+#define VIK_SPI_CS_PREFIX <&gpio0 21 GPIO_ACTIVE_LOW>
+```
+
+For a full example, see the `pinkies_out_v3` board [here](https://github.com/sadekbaroudi/zmk-fingerpunch-keyboards/blob/main/boards/arm/pinkies_out_v3/pinkies_out_v3.dts), also pasted below.
+
+```
+// Need to define this as 1, since we have an existing SPI device on this board
+// Starting point is normally 0, so we need to tell the vik_spi_adapter to start at 1 since
+// there is already a 0 on this board for the same bus
+#define VIK_SPI_REG_START 1
+// Need to specify the cs-gpios for this bus, as the same bus is used for VIK, so any SPI
+// VIK modules will need to know the existing CS gpios so it can append to them
+#define VIK_SPI_CS_PREFIX <&gpio0 21 GPIO_ACTIVE_LOW>
+
+// If this ever gets updated to a different SPI bus, update the corresponding "vik_spi: &spi0 {};"
+// in 3_0_0/vik_connector.dtsi and 3_1_0/vik_connector.dtsi
+&spi0 {
+    status = "okay";
+    cs-gpios = VIK_SPI_CS_PREFIX;
+    pinctrl-0 = <&spi0_default>;
+    pinctrl-names = "default";
+    clock-frequency = <DT_FREQ_M(2)>;
+
+    shift_reg: 595@0 {
+        compatible = "zmk,gpio-595";
+        status = "okay";
+        gpio-controller;
+        spi-max-frequency = <200000>;
+        reg = <0>;
+        #gpio-cells = <2>;
+        ngpios = <8>;
+    };
+};
+```
