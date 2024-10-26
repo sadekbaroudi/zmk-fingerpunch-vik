@@ -1,0 +1,11 @@
+/ {
+	split_inputs {
+		#address-cells = <1>;
+		#size-cells = <0>;
+
+		glidepoint_split: glidepoint_split@0 {
+			compatible = "zmk,input-split";
+			reg = <0>;
+		};
+	};
+};

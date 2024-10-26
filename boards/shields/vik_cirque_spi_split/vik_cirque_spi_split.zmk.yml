@@ -1,0 +1,8 @@
+file_format: "1"
+id: vik_cirque_spi_split
+name: vik_cirque_spi_split
+type: shield
+url: https://github.com/sadekbaroudi/vik/
+siblings:
+  - vik_cirque_split_split_central
+  - vik_cirque_split_split_peripheral
