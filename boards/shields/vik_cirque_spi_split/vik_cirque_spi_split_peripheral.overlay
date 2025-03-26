@@ -1,0 +1,34 @@
+/*
+ * Copyright (c) 2022 The ZMK Contributors
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+#include "../vik_shield_dts_preprocess.h"
+#include "vik_cirque_spi_split.dtsi"
+
+#include <input/processors.dtsi>
+#include <dt-bindings/zmk/input_transform.h>
+#include <dt-bindings/input/input-event-codes.h>
+
+&vik_spi {
+    status = "okay";
+    cs-gpios = VIK_SPI_CS_PREFIX_PROCESSED <&vik_conn 6 GPIO_ACTIVE_LOW>;
+    
+    glidepoint: glidepoint@VIK_SPI_REG_START {
+        compatible = "cirque,pinnacle";
+        reg = <VIK_SPI_REG_START>;
+        spi-max-frequency = <1000000>;
+        status = "okay";
+        dr-gpios = <&vik_conn 5 (GPIO_ACTIVE_HIGH)>; // DR pin on cirque is always &vik_conn 5
+
+        sensitivity = "1x";
+    };
+};
+
+&glidepoint_split {
+    device = <&glidepoint>;
+    // Input processors that are run before event data is sent
+    // to the central. Mostly useful for orientation fix ups.
+    input-processors = <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP | INPUT_TRANSFORM_X_INVERT | INPUT_TRANSFORM_Y_INVERT)>;
+};
