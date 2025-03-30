@@ -11,7 +11,7 @@
 #include <dt-bindings/input/input-event-codes.h>
 
 / {
-    glidepoint_input_listener: glidepoint_input {
+    glidepoint_input: glidepoint_input {
         compatible = "zmk,input-listener";
         device = <&glidepoint_split>;
 
