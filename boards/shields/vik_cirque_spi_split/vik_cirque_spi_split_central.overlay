@@ -10,11 +10,6 @@
 #include <dt-bindings/zmk/input_transform.h>
 #include <dt-bindings/input/input-event-codes.h>
 
-/ {
-    glidepoint_input: glidepoint_input {
-        compatible = "zmk,input-listener";
-        device = <&glidepoint_split>;
-
-        // input-processors = <&xy_transform (INPUT_TRANSFORM_XY_SWAP | INPUT_TRANSFORM_X_INVERT | INPUT_TRANSFORM_Y_INVERT) &xy_scaler 3 2>;
-    };
+&glidepoint_listener {
+    status = "okay";
 };
