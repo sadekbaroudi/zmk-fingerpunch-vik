@@ -1,0 +1,2 @@
+config SHIELD_VIK_DISPLAY_I2C
+	def_bool $(shields_list_contains,vik_display_i2c)

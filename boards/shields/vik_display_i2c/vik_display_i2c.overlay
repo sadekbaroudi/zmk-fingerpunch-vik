@@ -1,0 +1,40 @@
+/*
+ * Copyright (c) 2022 The ZMK Contributors
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+#include "../vik_shield_dts_preprocess.h"
+
+// i2c display config for vikoto
+// note that if you are using I2C with a controller with a vik connector directly on it (e.g. vikoto)
+// you need to use the intenal pull up resistors on the board
+// look in boards/arm/vikoto/vikoto-pinctrl.dtsi as an example
+// look for "bias-pull-up;"
+&vik_i2c {
+    status = "okay";
+
+    oled: ssd1306@3c {
+        compatible = "solomon,ssd1306fb";
+        status = "okay";
+        reg = <0x3c>;
+        width = <128>;
+        height = <32>;
+
+        segment-offset = <0>;
+        page-offset = <0>;
+        display-offset = <0>;
+        multiplex-ratio = <31>;
+        prechargep = <0x22>;
+        segment-remap;
+        com-invdir;
+        com-sequential;
+        inversion-on;
+    };
+};
+
+/ {
+    chosen {
+        zephyr,display = &oled;
+    };
+};
