@@ -57,7 +57,7 @@
     // update all of this once 3360 driver exists
     trackball: trackball@VIK_SPI_REG_START {
         status = "okay";
-        compatible = "pixart,pmw3610";
+        compatible = "pixart,pmw3610-zmk";
         reg = <VIK_SPI_REG_START>;
         spi-max-frequency = <2000000>;
         irq-gpios = <&vik_conn 4 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
