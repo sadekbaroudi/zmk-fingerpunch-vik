@@ -77,7 +77,7 @@ vik_spi_pmw3610: &spi1 {};
 
 In the example above, it's based on a controller that has an integrated VIK connector. However, you can also add VIK support to a keyboard like [vulpes minora](https://github.com/sadekbaroudi/vulpes-minora). In this case, the keyboard is wired to work directly from a nice!nano pinout, to a VIK connector on the PCB.
 
-There is also an example of the VIK connector definition, as shown in the [nice_nano.overlay](https://github.com/sadekbaroudi/zmk-fingerpunch-keyboards/blob/main/boards/shields/vulpes_minora/boards/nice_nano.overlay) for that board.
+There is also an example of the VIK connector definition, as shown in the [nice_nano_nrf52840_zmk.overlay](https://github.com/sadekbaroudi/zmk-fingerpunch-keyboards/blob/main/boards/shields/vulpes_minora/boards/nice_nano_nrf52840_zmk.overlay) for that board.
 
 ### VIK SPI support
 
