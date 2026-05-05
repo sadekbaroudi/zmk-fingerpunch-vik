@@ -47,7 +47,7 @@ For a whole list of examples of this, please see the [zmk-fingerpunch-keyboards]
 
 In order to add VIK support to a keyboard, you need to define the `vik_connector`, along with `vik_spi`, `vik_i2c`, and (optionally) `vik_spi_pmw3610` if you want to support the [VIK pmw3610 trackball module](https://github.com/sadekbaroudi/vik/tree/master/pcb/pmw3610)
 
-Here is an example vik connector definition for vikoto. In case this readme is out of date, you can take a look at the [vik_connector.dtsi](https://github.com/sadekbaroudi/zmk-fingerpunch-controllers/blob/main/boards/arm/vikoto/vik_connector.dtsi).
+Here is an example vik connector definition for vikoto. In case this readme is out of date, you can take a look at the [vik_connector.dtsi](https://github.com/sadekbaroudi/zmk-fingerpunch-controllers/blob/main/boards/fingerpunch/vikoto/vik_connector.dtsi).
 
 ```
 / {
@@ -77,7 +77,7 @@ vik_spi_pmw3610: &spi1 {};
 
 In the example above, it's based on a controller that has an integrated VIK connector. However, you can also add VIK support to a keyboard like [vulpes minora](https://github.com/sadekbaroudi/vulpes-minora). In this case, the keyboard is wired to work directly from a nice!nano pinout, to a VIK connector on the PCB.
 
-There is also an example of the VIK connector definition, as shown in the [nice_nano_v2.overlay](https://github.com/sadekbaroudi/zmk-fingerpunch-keyboards/blob/main/boards/shields/vulpes_minora/boards/nice_nano_v2.overlay) for that board.
+There is also an example of the VIK connector definition, as shown in the [nice_nano.overlay](https://github.com/sadekbaroudi/zmk-fingerpunch-keyboards/blob/main/boards/shields/vulpes_minora/boards/nice_nano.overlay) for that board.
 
 ### VIK SPI support
 
@@ -96,7 +96,7 @@ Please note that if you have multiple `cs-gpios`, you should include all of them
 #define VIK_SPI_CS_PREFIX <&gpio0 21 GPIO_ACTIVE_LOW>, <&gpio0 14 GPIO_ACTIVE_LOW>
 ```
 
-For a full example, see the `pinkies_out_v3` board [here](https://github.com/sadekbaroudi/zmk-fingerpunch-keyboards/blob/main/boards/arm/pinkies_out_v3/pinkies_out_v3.dts), also pasted below.
+For a full example, see the `pinkies_out_v3` board [here](https://github.com/sadekbaroudi/zmk-fingerpunch-keyboards/blob/main/boards/fingerpunch/pinkies_out_v3/pinkies_out_v3.dts), also pasted below.
 
 ```
 // Need to define this as 1, since we have an existing SPI device on this board
