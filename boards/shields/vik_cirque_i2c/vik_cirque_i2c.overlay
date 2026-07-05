@@ -21,11 +21,10 @@
         compatible = "cirque,pinnacle";
         reg = <0x2a>;
         status = "okay";
-        dr-gpios = <&vik_conn 5 (GPIO_ACTIVE_HIGH)>; // DR pin on cirque is always &vik_conn 5
+        data-ready-gpios = <&vik_conn 5 (GPIO_ACTIVE_HIGH)>; // DR pin on cirque is always &vik_conn 5
 
         sensitivity = "4x";
-        sleep;
-        no-taps;
+        sleep-mode-enable;
     };
 };
 

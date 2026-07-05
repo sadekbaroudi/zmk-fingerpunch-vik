@@ -17,11 +17,10 @@
         reg = <VIK_SPI_REG_START>;
         spi-max-frequency = <1000000>;
         status = "okay";
-        dr-gpios = <&vik_conn 5 (GPIO_ACTIVE_HIGH)>; // DR pin on cirque is always &vik_conn 5
+        data-ready-gpios = <&vik_conn 5 (GPIO_ACTIVE_HIGH)>; // DR pin on cirque is always &vik_conn 5
 
         sensitivity = "4x";
-        sleep;
-        no-taps;
+        sleep-mode-enable;
     };
 };
 
