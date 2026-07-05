@@ -1,0 +1,21 @@
+# This file generates the GitHub Actions matrix.
+#
+# zmk-fingerpunch-vik is a *module* that only provides VIK shields (Cirque,
+# PMW3610/PMW3360, vikropad). None of these can be built standalone: they need
+# a board that exposes the VIK connector (from zmk-fingerpunch-controllers) plus,
+# for the pointing shields, a keyboard shield that provides keys/physical layout
+# (from zmk-fingerpunch-keyboards). Because controllers and keyboards both import
+# THIS repo, importing them back here would create a circular west manifest.
+#
+# Therefore the real build coverage for these shields lives in
+# zmk-fingerpunch-keyboards/build.yaml (which imports both controllers and vik).
+# This empty matrix keeps CI green and consistent with
+# zmk-fingerpunch-controllers/build.yaml.
+#
+# board: [ "nice_nano" ]
+# shield: [ "corne_left", "corne_right" ]
+# include:
+#   - board: bdn9_rev2
+#   - board: nice_nano
+#     shield: reviung41
+---
